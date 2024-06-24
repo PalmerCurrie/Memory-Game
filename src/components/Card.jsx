@@ -5,14 +5,17 @@ export default function Card({pokemon}) {
 
     return (
         <div className="pokemon-card">
-            <p>Pokemon Card</p>
-            <p> {pokemon.name} </p>
+
             <img
               src={pokemon.image}
               alt={pokemon.name}
-              className="card-image"
+              className="pokemon-image"
               draggable="false"
             />
+
+            <p className='pokemon-name'>
+                {pokemon.name}
+            </p>
 
         </div>
 

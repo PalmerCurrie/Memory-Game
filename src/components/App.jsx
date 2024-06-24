@@ -37,11 +37,13 @@ function App() {
 
 
         {/* // Have to hit Start Game button before uncomenting the below */}
-        {/* <Card pokemon={pokemons[0]} />
-        <Card pokemon={pokemons[1]} />
-        <Card pokemon={pokemons[2]} />
-        <Card pokemon={pokemons[3]} />
-        <Card pokemon={pokemons[4]} /> */}
+        <div className="pokemon-card-container">
+          {pokemons.map((pokemon, index) => (
+            <div key={index} className="pokemon-card">
+              <Card pokemon={pokemon} />
+            </div>
+          ))}
+        </div>
       </div>
     </>
   )
