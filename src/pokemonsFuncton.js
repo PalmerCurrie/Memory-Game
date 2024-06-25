@@ -58,19 +58,14 @@ export default function pokemonsFunction() {
 
     function shufflePokemons() {
         const availableCards = [...pokemons];
-        const shuffledCards = [];
 
-        while (availableCards.length != 0) {
-            const index = Math.floor(Math.random * availableCards.length);
-            const card = availableCards[index];
-
-            // give the new card a unique id to trigger re render
-            // card.id = uniqid();
-            shuffledCards.push(card);
-            availableCards.splice(index, 1); // remove given card from avaiable cards
+        // Fisher-Yates shuffle algorithm
+        for (let i = availableCards.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1)); // pick a random valid index
+            [availableCards[i], availableCards[j]] = [availableCards[j], availableCards[i]]; // Swap elements
         }
 
-        setPokemons(shuffledCards);
+        setPokemons(availableCards);
     }
 
 

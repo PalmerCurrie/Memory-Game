@@ -22,8 +22,34 @@ function App() {
     await sleep(MINIMUM_LOAD_TIME);
   }
 
-  const startGame = (e) => {
+  const startGame = () => {
     initializePokemon(AMOUNT);
+  }
+
+  const shuffleCards = () => {
+    console.log("before: ");
+    pokemons.forEach( p => {
+      console.log(p.name);
+    })
+    shufflePokemons();
+    console.log("after: ");
+    pokemons.forEach( p => {
+      console.log(p.name);
+    })
+    // renderCards();
+
+  }
+
+  const renderCards = () => {
+    return (
+      <div className="pokemon-card-container" id="pokemon-card-container">
+          {pokemons.map((pokemon, index) => (
+            <div key={index} className="pokemon-card">
+              <Card pokemon={pokemon} />
+            </div>
+          ))}
+      </div>
+    )
   }
 
 
@@ -34,16 +60,10 @@ function App() {
     <>
       <div>
         <button onClick={startGame}>Start Game</button>
+        <button onClick={shuffleCards}>Shuffle Cards</button>
 
-
-        {/* // Have to hit Start Game button before uncomenting the below */}
-        <div className="pokemon-card-container">
-          {pokemons.map((pokemon, index) => (
-            <div key={index} className="pokemon-card">
-              <Card pokemon={pokemon} />
-            </div>
-          ))}
-        </div>
+        
+        {renderCards()}
       </div>
     </>
   )
