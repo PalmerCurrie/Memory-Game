@@ -26,27 +26,11 @@ function App() {
     initializePokemon(AMOUNT);
   }
 
-  const shuffleCards = () => {
-    console.log("before: ");
-    pokemons.forEach( p => {
-      console.log(p.name);
-    })
-    shufflePokemons();
-    console.log("after: ");
-    pokemons.forEach( p => {
-      console.log(p.name);
-    })
-    // renderCards();
-
-  }
-
   const renderCards = () => {
     return (
       <div className="pokemon-card-container" id="pokemon-card-container">
           {pokemons.map((pokemon, index) => (
-            <div key={index} className="pokemon-card">
-              <Card pokemon={pokemon} />
-            </div>
+              <Card pokemon={pokemon} key={index} />
           ))}
       </div>
     )
@@ -60,7 +44,7 @@ function App() {
     <>
       <div>
         <button onClick={startGame}>Start Game</button>
-        <button onClick={shuffleCards}>Shuffle Cards</button>
+        <button onClick={shufflePokemons}>Shuffle Cards</button>
 
         
         {renderCards()}
