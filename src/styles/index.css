@@ -34,6 +34,6 @@ body::before {
   right: 0;
   bottom: 0;
   background: rgba(0, 0, 0, 0.5); 
-  z-index: -1; 
+  z-index: -1;  /* places it in the background to avoid interfering with other componenets*/ 
 }
 
