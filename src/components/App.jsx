@@ -1,13 +1,14 @@
 // import { useState } from 'react'
 import "../styles/App.css";
-import Card from "./Card";
-import Scoreboard from "./Scoreboard";
 import { useState, useEffect } from "react";
 
+import Card from "./Card";
+import Scoreboard from "./Scoreboard";
 import pokemonsFuncton from "../pokemonsFuncton";
 import GameWinScreen from "./GameWinScreen";
 import GameLoseScreen from "./GameLoseScreen";
 import MainMenu from "./MainMenu";
+import GameInformation from "./GameInformation";
 
 
 // Loading In At Start
@@ -139,7 +140,9 @@ function App() {
 
   return (
     <>
+    <GameInformation />
       <div>
+        
         {mainMenuScreen && (<MainMenu handleLevelSelect={handleLevelSelect} setMainMenuScreen={setMainMenuScreen} highScore={highScore}/>)}
 
         {!mainMenuScreen && (
