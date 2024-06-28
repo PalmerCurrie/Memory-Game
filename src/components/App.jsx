@@ -6,9 +6,10 @@ import { useState, useEffect } from "react";
 
 import pokemonsFuncton from "../pokemonsFuncton";
 import GameWinScreen from "./GameWinScreen";
+import GameLoseScreen from "./GameLoseScreen";
 
 
-// for loading in at start
+// Loading In At Start
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function App() {
@@ -50,6 +51,7 @@ function App() {
   const [currentScore, setCurrentScore] = useState();
   const [highScore, setHighScore] = useState();
   const [gameWon, setGameWon] = useState(false);
+  const [loseScreen, setLoseScreen] = useState(false);
   const [selectedCards, setSelectedCards] = useState(new Set());
 
   useEffect(() => {
@@ -87,10 +89,8 @@ function App() {
       setSelectedCards(updateSelectedCard);
       shufflePokemons();
     } else {
-      startGame(); // temporary placeholder for restarting the game
-      console.log("already selected: " + pokemon.name);
-      // end game
-      // load in end game screen etc......
+      // Picked Same Card, Game Over
+      setLoseScreen(true);
     }
     updateScore();
   }
@@ -98,6 +98,7 @@ function App() {
   
  const handlePlayAgain = () => {
     setGameWon(false);
+    setLoseScreen(false);
     setCurrentScore(0);
     startGame();
  }
@@ -112,7 +113,8 @@ function App() {
       
         {renderCards()}
 
-        {gameWon && (<GameWinScreen currentScore={currentScore} onPlayAgain={handlePlayAgain}/>) }
+        {gameWon && (<GameWinScreen highScore={highScore} onPlayAgain={handlePlayAgain}/>) }
+        {loseScreen && (<GameLoseScreen highScore={highScore} onPlayAgain={handlePlayAgain}/>) }
       </div>
     </>
   )

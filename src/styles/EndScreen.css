@@ -1,4 +1,4 @@
-.winning-screen-overlay {
+.end-screen-overlay {
     position: fixed;
     top: 0;
     left: 0;
@@ -11,7 +11,7 @@
     z-index: 1000; /* Ensure it is on top of everything */
 }
 
-.winning-screen-container {
+.end-screen-container {
     height: 450px;
     width: 450px;
     background-color: white;
@@ -29,13 +29,13 @@
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
 }
 
-.winning-screen-container h1, 
-.winning-screen-container p {
+.end-screen-container h1, 
+.end-screen-container p {
     margin: 5px 0;
     color: black; 
 }
 
-.winning-screen-container button {
+.end-screen-container button {
     /* margin: 10px; */
     padding: 10px 20px;
     font-family: 'Press Start 2P', cursive;
@@ -49,7 +49,7 @@
     gap: 5px;
 }
 
-.winning-gif {
+.end-gif {
     width: 75%;
     height: 75%;
     max-width: 100%;
