@@ -87,6 +87,24 @@ function App() {
     startGame(newAmount);
   }
 
+  const handleNextLevel = () => {
+    if (amount == 5) {
+      setAmount(10);
+      setGameWon(false);
+      setLoseScreen(false);
+      startGame(10);
+    } else if (amount == 10) {
+      setAmount(15);
+      setGameWon(false);
+      setLoseScreen(false);
+      startGame(15);
+    } else {
+      setGameWon(false);
+      setLoseScreen(false);
+      startGame(15);
+    }
+  }
+
 
  const MINIMUM_LOAD_TIME = 250;
 
@@ -129,9 +147,9 @@ function App() {
           <Scoreboard currentScore={currentScore} highScore={highScore} amount={amount}/>
           {renderCards()}
           {gameWon && 
-            (<GameWinScreen highScore={highScore} onPlayAgain={handlePlayAgain} onQuit={onQuit}/> ) }
+            (<GameWinScreen highScore={highScore} onPlayAgain={handlePlayAgain} onQuit={onQuit} onNextLevel={handleNextLevel}/> ) }
           {loseScreen && 
-            (<GameLoseScreen highScore={highScore} onPlayAgain={handlePlayAgain} onQuit={onQuit}/> )}
+            (<GameLoseScreen highScore={highScore} onPlayAgain={handlePlayAgain} onQuit={onQuit} onNextLevel={handleNextLevel}/> )}
             </>
         )}
       </div>
