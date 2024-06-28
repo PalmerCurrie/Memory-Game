@@ -1,6 +1,7 @@
 // import { useState } from 'react'
 import "../styles/App.css";
 import Card from "./Card";
+import Scoreboard from "./Scoreboard";
 import { useState } from "react";
 
 import pokemonsFuncton from "../pokemonsFuncton";
@@ -26,6 +27,7 @@ function App() {
   const startGame = () => {
     setSelectedCards(new Set());
     initializePokemon(AMOUNT);
+    
   }
 
 
@@ -46,17 +48,35 @@ function App() {
 
   const [selectedCards, setSelectedCards] = useState(new Set());
 
+  const updateScore = () => {
+    let score = selectedCards.size;
+    setCurrentScore(score);
+
+    if (highScore == null || highScore == 0) {
+      setHighScore(score);
+    }
+
+    if (score > highScore) {
+      setHighScore(score);
+    }
+
+  }
+
 
   const handleCardClick = (pokemon) => {
 
+    // Successful Card Select
     if (!selectedCards.has(pokemon.name)) {
       const updateSelectedCard = new Set(selectedCards);
       updateSelectedCard.add(pokemon.name);
       setSelectedCards(updateSelectedCard);
       shufflePokemons();
+      updateScore();
+      
     } else {
       startGame(); // temporary placeholder for restarting the game
-      console.log("already selected" + pokemon.name);
+      console.log("already selected: " + pokemon.name);
+      updateScore();
       // end game
       // load in end game screen etc......
     }
@@ -64,7 +84,8 @@ function App() {
     // update score
   }
 
-
+  const [currentScore, setCurrentScore] = useState();
+  const [highScore, setHighScore] = useState();
   
 
 
@@ -75,11 +96,7 @@ function App() {
   return (
     <>
       <div>
-        <div className="scoreboard">
-            <div className="current-score">
-              Current Score: {selectedCards.size}
-            </div>
-        </div>
+        <Scoreboard currentScore={currentScore} highScore={highScore} amount={AMOUNT}/>
         <button onClick={startGame}>Start Game</button>
         <button onClick={shufflePokemons}>Shuffle Cards</button>
 

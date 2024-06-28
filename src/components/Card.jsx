@@ -4,7 +4,6 @@ import '../styles/Card.css'; // Import the CSS file
 export default function Card({pokemon, onClick}) {
 
     const handleClick = () => {
-        console.log("Clicked:", pokemon.name);
         onClick(); 
       };
 

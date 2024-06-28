@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+.scoreboard-container {
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    margin: 10px;
+}
+
+.scores {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 18px;
+    color: black; 
+}
+
+.scores p {
+    font-size: 20px;
+    margin: 0;
+}
+
+.game p {
+    font-size: 20px;
+    margin: 0;
+}
