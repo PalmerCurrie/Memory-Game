@@ -122,7 +122,7 @@ function App() {
   return (
     <>
       <div>
-        {mainMenuScreen && (<MainMenu handleLevelSelect={handleLevelSelect} setMainMenuScreen={setMainMenuScreen}/>)}
+        {mainMenuScreen && (<MainMenu handleLevelSelect={handleLevelSelect} setMainMenuScreen={setMainMenuScreen} highScore={highScore}/>)}
 
         {!mainMenuScreen && (
           <>

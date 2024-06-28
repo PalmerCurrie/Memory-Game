@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import '../styles/MainMenu.css'; // Import the CSS file
 
-export default function MainMenu({handleLevelSelect, setMainMenuScreen}) {
+export default function MainMenu({handleLevelSelect, setMainMenuScreen, highScore}) {
     
     // passes the amount to the App through handleLevelSelect
     const handleButtonClick = (amount) => {
@@ -19,6 +19,8 @@ export default function MainMenu({handleLevelSelect, setMainMenuScreen}) {
                     <button onClick={() => handleButtonClick(10)}>Medium</button>
                     <button onClick={() => handleButtonClick(15)}>Hard</button>
                 </div>
+
+                <p>High Score: {highScore}</p>
 
             </div>
         </div>
