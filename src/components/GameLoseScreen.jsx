@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import '../styles/EndScreen.css'; // Import the CSS file
 
-export default function GameLoseScreen({highScore, onPlayAgain}) {
+export default function GameLoseScreen({highScore, onPlayAgain, onQuit}) {
     // onNextlevel
     // onQuit
 
@@ -17,7 +17,7 @@ export default function GameLoseScreen({highScore, onPlayAgain}) {
                 <div className='button-select'>
                     <button onClick={onPlayAgain}>Play Again!</button>
                     <button onClick={onPlayAgain}>Next Level</button>
-                    <button onClick={onPlayAgain}>Quit</button>
+                    <button onClick={onQuit}>Quit</button>
                     </div>
 
             </div>

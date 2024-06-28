@@ -7,6 +7,7 @@ import { useState, useEffect } from "react";
 import pokemonsFuncton from "../pokemonsFuncton";
 import GameWinScreen from "./GameWinScreen";
 import GameLoseScreen from "./GameLoseScreen";
+import MainMenu from "./MainMenu";
 
 
 // Loading In At Start
@@ -14,48 +15,19 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 function App() {
 
-  const AMOUNT = 5;  // number of pokemon to be displayed
-  const MINIMUM_LOAD_TIME = 250;
-
-  const {pokemons, setPokemons, getPokemons, shufflePokemons} = pokemonsFuncton();
-
-  const initializePokemon = async (AMOUNT) => {
-    const randomPokemons = getPokemons(AMOUNT);
-    setPokemons(await randomPokemons);
-
-    await sleep(MINIMUM_LOAD_TIME);
-  }
-
-  const startGame = () => {
-    setSelectedCards(new Set());
-    initializePokemon(AMOUNT);
-    
-  }
-
-
-  const renderCards = () => {
-    return (
-      <div className="pokemon-card-container" id="pokemon-card-container">
-          {pokemons.map((pokemon, index) => (
-              <Card pokemon={pokemon} key={index} 
-              onClick={ () => handleCardClick(pokemon)}  // passes pokemon object to handleCardClick
-              />
-          ))}
-      </div>
-    )
-  }
-
 
   // Game Logic:
-
+  const [amount, setAmount] = useState(0);
   const [currentScore, setCurrentScore] = useState();
   const [highScore, setHighScore] = useState();
   const [gameWon, setGameWon] = useState(false);
   const [loseScreen, setLoseScreen] = useState(false);
+  const [mainMenuScreen, setMainMenuScreen] = useState(true);
   const [selectedCards, setSelectedCards] = useState(new Set());
+  const {pokemons, setPokemons, getPokemons, shufflePokemons} = pokemonsFuncton();
 
   useEffect(() => {
-    if (currentScore >= AMOUNT) {
+    if (currentScore >= amount) {
       setGameWon(true);
     }
   }, [currentScore]) // runs when currentScore changes    DependencyArray
@@ -100,21 +72,68 @@ function App() {
     setGameWon(false);
     setLoseScreen(false);
     setCurrentScore(0);
-    startGame();
+    startGame(amount);
  }
+
+ const onQuit = () => {
+  setMainMenuScreen(true);
+  setLoseScreen(false);
+ }
+
+  // Main Menu Logic:
+   const handleLevelSelect = (newAmount) => {
+    setAmount(newAmount);
+    setGameWon(false)
+    startGame(newAmount);
+  }
+
+
+ const MINIMUM_LOAD_TIME = 250;
+
+
+ const initializePokemon = async (amount) => {
+   const randomPokemons = getPokemons(amount);
+   setPokemons(await randomPokemons);
+
+   await sleep(MINIMUM_LOAD_TIME);
+ }
+
+ const startGame = (newAmount) => {
+   setSelectedCards(new Set());
+   initializePokemon(newAmount);
+   
+ }
+
+
+ const renderCards = () => {
+   return (
+     <div className="pokemon-card-container" id="pokemon-card-container">
+         {pokemons.map((pokemon, index) => (
+             <Card pokemon={pokemon} key={index} 
+             onClick={ () => handleCardClick(pokemon)}  // passes pokemon object to handleCardClick
+             />
+         ))}
+     </div>
+   )
+ }
+
 
 
   return (
     <>
       <div>
-        <Scoreboard currentScore={currentScore} highScore={highScore} amount={AMOUNT}/>
-        <button onClick={startGame}>Start Game</button>
-        <button onClick={shufflePokemons}>Shuffle Cards</button>
-      
-        {renderCards()}
+        {mainMenuScreen && (<MainMenu handleLevelSelect={handleLevelSelect} setMainMenuScreen={setMainMenuScreen}/>)}
 
-        {gameWon && (<GameWinScreen highScore={highScore} onPlayAgain={handlePlayAgain}/>) }
-        {loseScreen && (<GameLoseScreen highScore={highScore} onPlayAgain={handlePlayAgain}/>) }
+        {!mainMenuScreen && (
+          <>
+          <Scoreboard currentScore={currentScore} highScore={highScore} amount={amount}/>
+          {renderCards()}
+          {gameWon && 
+            (<GameWinScreen highScore={highScore} onPlayAgain={handlePlayAgain} onQuit={onQuit}/> ) }
+          {loseScreen && 
+            (<GameLoseScreen highScore={highScore} onPlayAgain={handlePlayAgain} onQuit={onQuit}/> )}
+            </>
+        )}
       </div>
     </>
   )

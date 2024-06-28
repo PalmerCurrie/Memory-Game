@@ -1,0 +1,50 @@
+.main-screen-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensure it is on top of everything */
+}
+
+.main-container {
+    height: 450px;
+    width: 450px;
+    background-color: white;
+    border: 2px solid black;
+    z-index: 1001;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+    font-family: 'Press Start 2P', cursive; /* Consistent font style */
+    border: 5px solid black; /* Thick black border */
+    border-radius: 20px; /* Rounded corners for a softer look */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+}
+
+.end-screen-container h1, 
+.end-screen-container p {
+    margin: 5px 0;
+    color: black; 
+}
+
+.end-screen-container button {
+    /* margin: 10px; */
+    padding: 10px 20px;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.button-select {
+    display: grid;
+    grid-template-rows: 1fr, 1fr, 1fr;
+    gap: 5px;
+}
