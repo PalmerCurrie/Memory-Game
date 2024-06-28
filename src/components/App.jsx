@@ -2,9 +2,10 @@
 import "../styles/App.css";
 import Card from "./Card";
 import Scoreboard from "./Scoreboard";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 import pokemonsFuncton from "../pokemonsFuncton";
+import GameWinScreen from "./GameWinScreen";
 
 
 // for loading in at start
@@ -46,7 +47,22 @@ function App() {
 
   // Game Logic:
 
+  const [currentScore, setCurrentScore] = useState();
+  const [highScore, setHighScore] = useState();
+  const [gameWon, setGameWon] = useState(false);
   const [selectedCards, setSelectedCards] = useState(new Set());
+
+  useEffect(() => {
+    if (currentScore >= AMOUNT) {
+      setGameWon(true);
+    }
+  }, [currentScore]) // runs when currentScore changes    DependencyArray
+
+  useEffect(() => {
+    updateScore();
+  }, [selectedCards])
+  
+
 
   const updateScore = () => {
     let score = selectedCards.size;
@@ -59,7 +75,6 @@ function App() {
     if (score > highScore) {
       setHighScore(score);
     }
-
   }
 
 
@@ -71,26 +86,21 @@ function App() {
       updateSelectedCard.add(pokemon.name);
       setSelectedCards(updateSelectedCard);
       shufflePokemons();
-      updateScore();
-      
     } else {
       startGame(); // temporary placeholder for restarting the game
       console.log("already selected: " + pokemon.name);
-      updateScore();
       // end game
       // load in end game screen etc......
     }
-
-    // update score
+    updateScore();
   }
 
-  const [currentScore, setCurrentScore] = useState();
-  const [highScore, setHighScore] = useState();
   
-
-
-
-
+ const handlePlayAgain = () => {
+    setGameWon(false);
+    setCurrentScore(0);
+    startGame();
+ }
 
 
   return (
@@ -99,9 +109,10 @@ function App() {
         <Scoreboard currentScore={currentScore} highScore={highScore} amount={AMOUNT}/>
         <button onClick={startGame}>Start Game</button>
         <button onClick={shufflePokemons}>Shuffle Cards</button>
-
-        
+      
         {renderCards()}
+
+        {gameWon && (<GameWinScreen currentScore={currentScore} onPlayAgain={handlePlayAgain}/>) }
       </div>
     </>
   )
