@@ -89,7 +89,7 @@ function App() {
   // Main Menu Logic:
    const handleLevelSelect = (newAmount) => {
     setAmount(newAmount);
-    setGameWon(false)
+    setGameWon(false);
     startGame(newAmount);
   }
 
