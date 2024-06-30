@@ -60,7 +60,12 @@ function App() {
       const updateSelectedCard = new Set(selectedCards);
       updateSelectedCard.add(pokemon.name);
       setSelectedCards(updateSelectedCard);
-      shufflePokemons();
+      shufflePokemonsAnimation();
+
+      setTimeout(() => {
+        setIsShuffling(false);
+      }, 500); 
+
     } else {
       // Picked Same Card, Game Over
       setLoseScreen(true);
@@ -84,7 +89,7 @@ function App() {
   // Main Menu Logic:
    const handleLevelSelect = (newAmount) => {
     setAmount(newAmount);
-    setGameWon(false)
+    setGameWon(false);
     startGame(newAmount);
   }
 
@@ -120,20 +125,33 @@ function App() {
  const startGame = (newAmount) => {
    setSelectedCards(new Set());
    initializePokemon(newAmount);
-   
  }
 
+
+ // Rendering Cards and Flipping Animations:
+ const [isShuffling, setIsShuffling] = useState(false);
 
  const renderCards = () => {
    return (
      <div className="pokemon-card-container" id="pokemon-card-container">
          {pokemons.map((pokemon, index) => (
-             <Card pokemon={pokemon} key={index} 
-             onClick={ () => handleCardClick(pokemon)}  // passes pokemon object to handleCardClick
+             <Card 
+                pokemon={pokemon} 
+                key={index} 
+                onClick={ () => handleCardClick(pokemon)}  // passes pokemon object to handleCardClick
+                isShuffling={isShuffling}
              />
          ))}
      </div>
    )
+ }
+
+ const shufflePokemonsAnimation = () => {
+  setIsShuffling(true);
+  setTimeout(() => {
+    shufflePokemons();
+  }, 250)
+
  }
 
 
