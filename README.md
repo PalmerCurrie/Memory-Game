@@ -2,7 +2,7 @@
 
 A Memory Game made with Javascript, HTML, and CSS, run using Vite + React. Pokemon memory game using the PokeAPI
 
-[Pokemon Memory Game Preview](https://palmercurrie.github.io/memory-game/)
+[Pokemon Memory Game Preview](https://main--palmercurrie-memory-game.netlify.app/)
 
 # Features
 - Level Select with multiple levels of varying difficulty
