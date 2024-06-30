@@ -24,8 +24,10 @@ A Memory Game made with Javascript, HTML, and CSS, run using Vite + React. Pokem
 ![image](https://github.com/PalmerCurrie/memory-game/assets/129619038/d9aac7b0-4786-45be-97fc-185f398751cb)
 
 # How To Play
-- Pick every card that you have not already selected  
-- If you pick a card you have chosen before, you lose  
+- Your goal is to click on all the cards without clicking the same card twice. 
+- Each time you click a card, the order of the cards will shuffle, adding to the challenge.
+- Continue clicking until you’ve clicked all the cards correctly to win the game.
+- If you click a card you’ve already clicked before, the game is over.  
 
 
 This game helps to build your memory and is fun for everyone!
